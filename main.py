@@ -29,7 +29,7 @@ class principal:
         self.tipo_pgto = Frame(master) 
         self.tipo_pgto["pady"] = 5 
         self.tipo_pgto.pack() 
-
+        
         self.valor = Frame(master) 
         self.valor["pady"] = 5 
         self.valor.pack() 
@@ -43,7 +43,7 @@ class principal:
         self.botoes["pady"] = 5
         self.botoes.pack() 
 
-        self.campoDez = Frame(master, width=900) 
+        self.campoDez = Frame(master) 
         self.campoDez["pady"] = 5
         self.campoDez.pack() 
 
@@ -67,22 +67,25 @@ class principal:
         self.idgastos.pack(side=LEFT)
 
         ##### TIPO #####
-        self.lblnome = tk.Label(self.tipo, text="Tipo:", width="25", font=self.fonte)
-        self.lblnome.pack(side=LEFT) # side especifica a inclusão da escrita e LEFT a esquerda
+        self.lbltipo = tk.Label(self.tipo, text="Tipo de gasto:", width="25", font=self.fonte)
+        self.lbltipo.pack(side=LEFT) # side especifica a inclusão da escrita e LEFT a esquerda
 
-        self.tipo = tk.Entry(self.tipo) 
-        self.tipo["width"] = 30
+        choices_tipo = ['Educação', 'Lazer', 'Saúde', 'Investimento', 'Objetivos', 'Transporte', 'Alimentação', 'Outros']
+        self.tipo = ttk.Combobox(self.tipo, values=choices_tipo)
+        self.tipo["width"] = 27
         self.tipo["font"] = self.fonte
         self.tipo.pack(side=LEFT)
 
         ##### TIPO_PGTO #####
-        self.lbltipo_pgto = tk.Label(self.tipo_pgto, text="Tipo de Pagamento:", width="25", font=self.fonte)
+        self.lbltipo_pgto = tk.Label(self.tipo_pgto, text="Tipo de pagamento:", width="25", font=self.fonte)
         self.lbltipo_pgto.pack(side=LEFT) # side especifica a inclusão da escrita e LEFT a esquerda
 
-        self.tipo_pgto = tk.Entry(self.tipo_pgto) 
-        self.tipo_pgto["width"] = 30
+        choices = ['Crédito', 'Débito', 'Pix']
+        self.tipo_pgto = ttk.Combobox(self.tipo_pgto, values=choices)
+        self.tipo_pgto["width"] = 27
         self.tipo_pgto["font"] = self.fonte
         self.tipo_pgto.pack(side=LEFT)
+
 
         ##### Valor #####
         self.lblvalor = tk.Label(self.valor, text="Valor:", width="25", font=self.fonte)
@@ -128,7 +131,7 @@ class principal:
         self.botaoatualizar["text"] = "Atualizar"
         self.botaoatualizar["font"] = self.fonte
         self.botaoatualizar["width"] = 12
-        self.botaoatualizar["command"] = self.atualizarusuario
+        self.botaoatualizar["command"] = self.atualizargasto
         self.botaoatualizar.pack(side=LEFT)
 
         #### Botão - Deleta ####
@@ -136,7 +139,7 @@ class principal:
         self.botaodeletar["text"] = "Deletar"
         self.botaodeletar["font"] = self.fonte
         self.botaodeletar["width"] = 12
-        self.botaodeletar["command"] = self.excluirusuario
+        self.botaodeletar["command"] = self.excluirGasto
         self.botaodeletar.pack(side=LEFT)
 
         #### Botão - Sair ####
@@ -199,7 +202,7 @@ class principal:
     #### FIM - Função - Inserir Gastos ####
 
     #### INICIO - Função - Atualizar Gastos ####
-    def atualizarusuario(self):
+    def atualizargasto(self):
         usu = heranca()
 
         usu.idgastos = self.idgastos.get()
@@ -208,7 +211,7 @@ class principal:
         usu.valor = self.valor.get()
         usu.descrição = self.descrição.get()
 
-        self.mensagem["text"] = usu.alteracliente()
+        self.mensagem["text"] = usu.alteragasto()
 
         self.idgastos.delete(0, END)
         self.tipo.delete(0, END)
@@ -217,26 +220,28 @@ class principal:
         self.descrição.delete(0, END)
     #### FIM - Função - Atualizar Gastos ####
 
-    def excluirusuario(self):
+    #### INICIO - Função - Deleta Gastos ####
+    def excluirGasto(self):
         usu = heranca()
 
         usu.idgastos = self.idgastos.get()
 
-        self.mensagem["text"] = usu.deletacliente()
+        self.mensagem["text"] = usu.deletagasto()
 
         self.idgastos.delete(0, END)
         self.tipo.delete(0, END)
         self.tipo_pgto.delete(0, END)
         self.valor.delete(0, END)
         self.descrição.delete(0, END)
+    #### INICIO - Função - Deleta Gastos ####
 
     #### INICO - Função - Consulta Gastos ####
     def consultarGasto(self):
         usu = heranca()
 
-        idgastos = self.idgastos.get()
+        usu.idgastos = self.idgastos.get()
 
-        self.mensagem["text"] = usu.consultaGasto(idgastos)
+        self.mensagem["text"] = usu.consultaGasto(self.idgastos)
 
         self.idgastos.delete(0, END)
         self.idgastos.insert(INSERT, usu.idgastos)

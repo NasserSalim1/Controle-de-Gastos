@@ -24,7 +24,7 @@ class heranca(object):
             return f"Erro de cadastro: {str(e)}"
 
     # Atualizar gasto
-    def alteracliente(self):
+    def alteragasto(self):
         banco = Banco()
         try:
             c = banco.conexao.cursor()
@@ -40,7 +40,7 @@ class heranca(object):
             return f"Erro na atualização: {str(e)}"
 
     # Deletar gasto
-    def deletacliente(self):
+    def deletagasto(self):
         banco = Banco()
         try:
             c = banco.conexao.cursor()
@@ -52,11 +52,11 @@ class heranca(object):
             return f"O gasto não foi deletado: {str(e)}"
 
     # Consultar gasto
-    def consultaGasto(self, idgastos):
+    def consultaGasto(self):
         banco = Banco()
         try:
             c = banco.conexao.cursor()
-            c.execute("SELECT * FROM gastos WHERE idgastos = ?", (idgastos,))
+            c.execute("SELECT * FROM gastos WHERE idgastos = ?", (self.idgastos,))
             resultado = c.fetchone()
             c.close()
             banco.conexao.close()
