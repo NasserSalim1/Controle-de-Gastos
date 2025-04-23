@@ -13,8 +13,8 @@ class Banco():
                     idgastos INTEGER PRIMARY KEY AUTOINCREMENT,
                     tipo TEXT,
                     tipo_pgto TEXT,
-                    valor FLOAT,
-                    descrição TEXT,
+                    valor TEXT,
+                    descrição TEXT
                     )""")
             self.conexao.commit()
             c.close()

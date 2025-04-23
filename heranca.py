@@ -12,11 +12,11 @@ class heranca(object):
         self.yview = yview
 
     # Inserir gasto
-    def inserecliente(self):
+    def inseregasto(self):
         banco = Banco()
         try:
             c = banco.conexao.cursor()
-            c.execute("INSERT INTO usuarios (tipo, tipo_pgto, valor, descrição) VALUES (?, ?, ?, ?)",
+            c.execute("INSERT INTO gastos (tipo, tipo_pgto, valor, descrição) VALUES (?, ?, ?, ?)",
                       (self.tipo, self.tipo_pgto, self.valor, self.descrição))
             banco.conexao.commit()
             return "Cadastro realizado!"
@@ -29,7 +29,7 @@ class heranca(object):
         try:
             c = banco.conexao.cursor()
             c.execute("""
-                UPDATE usuarios
+                UPDATE gastos
                 SET tipo = ?, tipo_pgto = ?, valor = ?, descrição = ?
                 WHERE idgastos = ?
             """, (self.tipo, self.tipo_pgto, self.valor, self.descrição, self.idgastos))
@@ -44,7 +44,7 @@ class heranca(object):
         banco = Banco()
         try:
             c = banco.conexao.cursor()
-            c.execute("DELETE FROM usuarios WHERE idgastos = ?", (self.idgastos,))
+            c.execute("DELETE FROM gastos WHERE idgastos = ?", (self.idgastos,))
             banco.conexao.commit()
             c.close()
             return "Gasto deletado!"
@@ -52,19 +52,20 @@ class heranca(object):
             return f"O gasto não foi deletado: {str(e)}"
 
     # Consultar gasto
-    def consultacliente(self, idgastos):
+    def consultaGasto(self, idgastos):
         banco = Banco()
         try:
             c = banco.conexao.cursor()
-            c.execute("SELECT * FROM usuarios WHERE idgastos = ?", (idgastos,))
+            c.execute("SELECT * FROM gastos WHERE idgastos = ?", (idgastos,))
             resultado = c.fetchone()
+            c.close()
+            banco.conexao.close()
             if resultado:
                 self.idgastos = resultado[0]
                 self.tipo = resultado[1]
                 self.tipo_pgto = resultado[2]
                 self.valor = resultado[3]
                 self.descrição = resultado[4]
-                c.close()
                 return "Consulta realizada com sucesso!"
             else:
                 return "Gasto não encontrado!"

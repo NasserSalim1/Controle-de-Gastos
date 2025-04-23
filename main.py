@@ -38,12 +38,12 @@ class principal:
         self.descricao["pady"] = 5
         self.descricao.pack() 
 
-        # Botões
+        # Interface - Botões
         self.botoes = Frame(master) 
         self.botoes["pady"] = 5
         self.botoes.pack() 
 
-        self.campoDez = Frame(master) 
+        self.campoDez = Frame(master, width=900) 
         self.campoDez["pady"] = 5
         self.campoDez.pack() 
 
@@ -106,21 +106,24 @@ class principal:
 
         ################## INICIO - Botões ##################
         
+        #### Botão - Cadastro ####
         self.botaocadastrar = tk.Button(self.botoes)
         self.botaocadastrar["text"] = "Cadastrar"
         self.botaocadastrar["font"] = self.fonte
         self.botaocadastrar["width"] = 12
-        self.botaocadastrar["command"] = self.inserircliente
+        self.botaocadastrar["command"] = self.inserirGasto
         self.botaocadastrar.pack(side=LEFT)
 
+        #### Botão - Pesquisa ####
         self.botaopesquisar = tk.Button(self.botoes)
         self.botaopesquisar["text"] = "Pesquisar"
         self.botaopesquisar["font"] = self.fonte
         self.botaopesquisar["width"] = 12
-        self.botaopesquisar["command"] = self.consultarcliente
+        self.botaopesquisar["command"] = self.consultarGasto
         self.botaopesquisar["command"] = self.mostratela
         self.botaopesquisar.pack(side=LEFT)
 
+        #### Botão - Atualiza ####
         self.botaoatualizar = tk.Button(self.botoes)
         self.botaoatualizar["text"] = "Atualizar"
         self.botaoatualizar["font"] = self.fonte
@@ -128,6 +131,7 @@ class principal:
         self.botaoatualizar["command"] = self.atualizarusuario
         self.botaoatualizar.pack(side=LEFT)
 
+        #### Botão - Deleta ####
         self.botaodeletar = tk.Button(self.botoes)
         self.botaodeletar["text"] = "Deletar"
         self.botaodeletar["font"] = self.fonte
@@ -135,6 +139,7 @@ class principal:
         self.botaodeletar["command"] = self.excluirusuario
         self.botaodeletar.pack(side=LEFT)
 
+        #### Botão - Sair ####
         self.botaosair = tk.Button(self.botoes)
         self.botaosair["text"] = "Sair"
         self.botaosair["font"] = self.fonte
@@ -148,27 +153,35 @@ class principal:
         self.mensagem["font"] = ("Tahoma", "9", "italic")
         self.mensagem.pack(side=LEFT)
     
+        ######## INICIO - Tabela ########
         self.scrollbary = Scrollbar(self.campoOnze, orient=VERTICAL)
         self.scrollbarx = Scrollbar(self.campoOnze, orient=HORIZONTAL)
-        self.tree = ttk.Treeview(self.campoOnze, columns=("idgastos", "tipo", "tipo_pgto", "valor", "descrição"), selectmode="extended", height=20, yscrollcommand=self.scrollbary.set, xscrollcommand=self.scrollbarx.set)
+        self.tree = ttk.Treeview(self.campoOnze, 
+                                 columns=("ID", "Tipo", "Tipo_Pagamento", "Valor", "Descrição"), 
+                                 selectmode="extended", 
+                                 height=20, 
+                                 yscrollcommand=self.scrollbary.set, 
+                                 xscrollcommand=self.scrollbarx.set)
         self.scrollbary.config(command=self.tree.yview)
         self.scrollbary.pack(side=RIGHT, fill=Y)
         self.scrollbarx.config(command=self.tree.xview)
         self.scrollbarx.pack(side=BOTTOM, fill=X)
-        self.tree.heading('idgastos', text="idgastos", anchor=W)
-        self.tree.heading('tipo', text="tipo", anchor=W)
-        self.tree.heading('tipo_pgto', text="tipo_pgto", anchor=W)
-        self.tree.heading('valor', text="Endereço", anchor=W)
-        self.tree.heading('descrição', text="descrição", anchor=W)
-        self.tree.column('#0', stretch=NO, minwidth=0, width=0)
-        self.tree.column('#1', stretch=NO, minwidth=0, width=30)
-        self.tree.column('#2', stretch=NO, minwidth=0, width=200)
-        self.tree.column('#3', stretch=NO, minwidth=0, width=80)
-        self.tree.column('#4', stretch=NO, minwidth=0, width=200)
-        self.tree.column('#5', stretch=NO, minwidth=0, width=80)
+        self.tree.heading('ID', text="ID", anchor=W)
+        self.tree.heading('Tipo', text="Tipo", anchor=W)
+        self.tree.heading('Tipo_Pagamento', text="Tipo_Pagamento", anchor=W)
+        self.tree.heading('Valor', text="Valor", anchor=W)
+        self.tree.heading('Descrição', text="Descrição", anchor=W)
+        self.tree.column('#0', stretch=NO, minwidth=0, width=0) # Nenhuma
+        self.tree.column('#1', stretch=NO, minwidth=0, width=30) # ID
+        self.tree.column('#2', stretch=NO, minwidth=0, width=150) # Tipo
+        self.tree.column('#3', stretch=NO, minwidth=0, width=100) # Tipo Pagamento
+        self.tree.column('#4', stretch=NO, minwidth=0, width=80) # Valor
+        self.tree.column('#5', stretch=NO, minwidth=0, width=100) # Descrição
         self.tree.pack(side=LEFT)
+        ######## FIM - Tabela ########
 
-    def inserircliente(self):
+    #### INICIO - Função - Inserir Gastos ####
+    def inserirGasto(self):
         usu = heranca()
 
         usu.tipo = self.tipo.get()
@@ -176,14 +189,16 @@ class principal:
         usu.valor = self.valor.get()
         usu.descrição = self.descrição.get()
 
-        self.mensagem["text"] = usu.inserecliente()
+        self.mensagem["text"] = usu.inseregasto()
 
         self.idgastos.delete(0, END)
         self.tipo.delete(0, END)
         self.tipo_pgto.delete(0, END)
         self.valor.delete(0, END)
         self.descrição.delete(0, END)
+    #### FIM - Função - Inserir Gastos ####
 
+    #### INICIO - Função - Atualizar Gastos ####
     def atualizarusuario(self):
         usu = heranca()
 
@@ -200,6 +215,7 @@ class principal:
         self.tipo_pgto.delete(0, END)
         self.valor.delete(0, END)
         self.descrição.delete(0, END)
+    #### FIM - Função - Atualizar Gastos ####
 
     def excluirusuario(self):
         usu = heranca()
@@ -214,13 +230,13 @@ class principal:
         self.valor.delete(0, END)
         self.descrição.delete(0, END)
 
-
-    def consultarcliente(self):
+    #### INICO - Função - Consulta Gastos ####
+    def consultarGasto(self):
         usu = heranca()
 
         idgastos = self.idgastos.get()
 
-        self.mensagem["text"] = usu.consultacliente(idgastos)
+        self.mensagem["text"] = usu.consultaGasto(idgastos)
 
         self.idgastos.delete(0, END)
         self.idgastos.insert(INSERT, usu.idgastos)
@@ -236,31 +252,27 @@ class principal:
 
         self.descrição.delete(0, END)
         self.descrição.insert(INSERT, usu.descrição)
+    #### FIM - Função - Consulta Gastos ####
     
+    #### INICIO - Função - Mostra dados na Tela ####
     def mostratela(self):
         banco = Banco()
         try:
             c = banco.conexao.cursor()
             self.tree.delete(*self.tree.get_children())
            #c.Database()
-            c.execute("SELECT * FROM usuarios")
+            c.execute("SELECT * FROM gastos")
             fetch = c.fetchall()
             for data in fetch:
-                self.tree.insert('', 'end', values=(data[0],data[1],data[2],data[3],data[4],data[5],data[6]))
+                self.tree.insert('', 'end', values=(data[0],data[1],data[2],data[3],data[4]))
             c.close()
             return "Consulta realizada com suecesso!"
         except:
             return "Erro de consulta!"
-
-    def inserirmensagem(self): # Próxima Aula mudar MessageBox
-        usuario = self.tipo.get()
-        if usuario == "enio":
-            self.mensagem["text"] = "Cadastrado!"
-        else:
-            self.mensagem["text"] = "Erro de Cadastro!"
+    #### FIM - Função - Mostra dados na Tela ####
 
 tela = Tk() # Função tkinter para abertura da tela
 tela.geometry("960x600")
-tela.title('Cadastro de Pessoas') # título principal da barra
+tela.title('Cadastro de Gastos') # título principal da barra
 principal(tela) # termo utilizado para orientar ao objeto
 tela.mainloop() # excecução do programa
