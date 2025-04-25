@@ -1,0 +1,5 @@
+from supabase import create_client
+
+url = "https://dirdlupkocponlqfiulq.supabase.co"
+key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRpcmRsdXBrb2Nwb25scWZpdWxxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU0Mzc3NDAsImV4cCI6MjA2MTAxMzc0MH0.vbNrQAzL7rMsLDCJIUyRm1cpw_ZwmXUqzOiLFwX6Lho"
+supabase = create_client(url, key)
