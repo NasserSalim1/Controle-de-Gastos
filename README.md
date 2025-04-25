@@ -34,32 +34,22 @@ Ele é uma versão web da aplicação originalmente feita com **Tkinter**.
    cd seu-repo
 
 2. **Crie e ative o ambiente virtual (recomendado)**
-
+  ```bash 
   python -m venv venv
-
+  ```
 3. Ative o ambiente virtual:
-
+   
   Windows:
+     ```bash
     - venv\Scripts\activate
 
   Mac/Linux:
+     ```bash
     - source venv/bin/activate
 
 4. Instale as dependências do projeto:
-
+   ```bash
   - pip install -r requirements.txt
-
-# 📝 Estrutura do Projeto
-.
-├── app.py                # Arquivo principal da aplicação Flask
-├── supabase_client.py   # Cliente para conexão com o Supabase
-├── requirements.txt     # Dependências do projeto
-├── templates/
-│   ├── index.html        # Página principal com a tabela de gastos
-│   └── form.html         # Formulário para adicionar/editar gastos
-└── static/
-    └── style.css         # Estilo adicional (opcional)
-
 
 
 
