@@ -40,17 +40,18 @@ Ele é uma versão web da aplicação originalmente feita com **Tkinter**.
 3. Ative o ambiente virtual:
    
   Windows:
-     ```bash
-    - venv\Scripts\activate
-
-  Mac/Linux:
-     ```bash
-    - source venv/bin/activate
-
-4. Instale as dependências do projeto:
+     
    ```bash
+    - venv\Scripts\activate
+   ```
+  Mac/Linux:
+  ```bash
+    - source venv/bin/activate
+   ```
+4. Instale as dependências do projeto:
+```bash
   - pip install -r requirements.txt
-
+```
 
 
 
