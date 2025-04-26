@@ -1,7 +1,8 @@
 # 💸 Controle de Gastos - Web App (Flask + Supabase + Bootstrap)
 
-Este é um projeto de controle de gastos desenvolvido em **Python com Flask**, usando **Supabase** como banco de dados e **Bootstrap** para o design responsivo.  
-Ele é uma versão web da aplicação originalmente feita com **Tkinter**.
+🛠️ Sobre o Projeto
+Este projeto demonstra como integrar uma base de dados Supabase (PostgreSQL) ao Power BI Free, utilizando chamadas à API REST do Supabase para carregar dados de forma segura e eficiente.
+A tabela de exemplo utilizada é chamada gastos.
 
 ---
 
@@ -21,49 +22,49 @@ Ele é uma versão web da aplicação originalmente feita com **Tkinter**.
 - [Flask](https://flask.palletsprojects.com/)
 - [Supabase (PostgreSQL)](https://supabase.com/)
 - [Bootstrap 5](https://getbootstrap.com/)
-- [Power BI](https://powerbi.microsoft.com/) (opcional, para relatórios)
+- [Power BI](https://powerbi.microsoft.com/) 
+
+## 📚 Bibliotecas Python
+
+- requests — Para fazer chamadas HTTP à API do Supabase.
+- pandas — Para manipulação e análise de dados (opcional, se usado).
+- supabase-py — (Se você usou a SDK oficial do Supabase no Python.)
 
 ---
 
-## 📦 Como Rodar Localmente
+## 🔗 Configuração da Conexão
 
-1. **Clone o repositório:**
+### 1. Informações necessárias
 
-   ```bash
-   git clone https://github.com/seu-usuario/seu-repo.git
-   cd seu-repo
+- **URL do Projeto**:  
+  `https://dirdlupkocponlqfiulq.supabase.co`
+  
+- **Nome da Tabela**:  
+  `gastos`
+  
+- **Anon Public Key (API Key)**:  
+  Obtida no painel do Supabase: **Settings → API → Anon Key**.
 
-2. **Crie e ative o ambiente virtual (recomendado)**
-  ```bash 
-  python -m venv venv
-  ```
-3. Ative o ambiente virtual:
+### 2. Montagem da URL para a API
+
+Formato: https://<projeto>.supabase.co/rest/v1/<nome-da-tabela>
+
+### 3. Conectando no Power BI
+
+1. No Power BI Desktop:
+   - Clique em **Obter Dados** → **Web**.
+   - Escolha a opção **Avançado**.
+
+2. Preencha:
+   - **URL Base**: `https://dirdlupkocponlqfiulq.supabase.co/rest/v1/gastos`
    
-  Windows:
-     
-   ```bash
-    - venv\Scripts\activate
-   ```
-  Mac/Linux:
-  ```bash
-    - source venv/bin/activate
-   ```
-4. Instale as dependências do projeto:
-```bash
-  - pip install -r requirements.txt
-```
+3. **Adicione dois cabeçalhos HTTP**:
+   
+| Nome | Valor |
+| :--- | :--- |
+| `apikey` | `SUA_ANON_KEY` |
+| `Authorization` | `Bearer SUA_ANON_KEY` |
 
+*(Substituir `SUA_ANON_KEY` pela chave que você pegou no Supabase.)*
 
-
-
-
-
-
-
-
-
-
-
-
-
- 
+4. Clique em **OK** e aguarde o carregamento dos dados.
