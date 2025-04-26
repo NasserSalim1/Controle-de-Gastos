@@ -39,6 +39,7 @@
                         <th>Tipo</th>
                         <th>Pagamento</th>
                         <th>Valor</th>
+                        <th>Categoria</th>
                         <th>Descrição</th>
                         <th>Ações</th>
                     </tr>
@@ -47,10 +48,11 @@
                     {% for item in registros %}
                     <tr>
                         <td>{{ item.id }}</td>
-                        <td>{{ item.tipo }}</td>
-                        <td>{{ item.tipo_pgto }}</td>
+                        <td>{{ item.tipo_movimentacao }}</td>
+                        <td>{{ item.forma_pagamento }}</td>
                         <td>R$ {{ '%.2f'|format(item.valor) }}</td>
-                        <td>{{ item.descrição }}</td>
+                        <td>{{ item.categoria }}</td>
+                        <td>{{ item.descricao }}</td>
                         <td>
                             <a href="{{ url_for('editar', id=item.id) }}" class="btn btn-sm btn-warning">✏️</a>
                             <a href="{{ url_for('excluir', id=item.id) }}" class="btn btn-sm btn-danger" onclick="return confirm('Tem certeza que deseja excluir?')">🗑️</a>

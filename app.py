@@ -12,10 +12,11 @@ def index():
 def adicionar():
     if request.method == 'POST':
         novo = {
-            "tipo": request.form['tipo'],
-            "tipo_pgto": request.form['tipo_pgto'],
+            "tipo_movimentacao": request.form['tipo_movimentacao'],
+            "forma_pagamento": request.form['forma_pagamento'],
             "valor": float(request.form['valor']),
-            "descrição": request.form['descrição']
+            "categoria": request.form['categoria'],
+            "descricao": request.form['descricao']
         }
         supabase.table('gastos').insert(novo).execute()
         return redirect(url_for('index'))
@@ -25,10 +26,11 @@ def adicionar():
 def editar(id):
     if request.method == 'POST':
         atualizado = {
-            "tipo": request.form['tipo'],
-            "tipo_pgto": request.form['tipo_pgto'],
+            "tipo_movimentacao": request.form['tipo_movimentacao'],
+            "forma_pagamento": request.form['forma_pagamento'],
             "valor": float(request.form['valor']),
-            "descrição": request.form['descrição']
+            "categoria": request.form['categoria'],
+            "descricao": request.form['descricao']
         }
         supabase.table('gastos').update(atualizado).eq('id', id).execute()
         return redirect(url_for('index'))
