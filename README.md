@@ -4,6 +4,8 @@
 Este projeto demonstra como integrar uma base de dados Supabase (PostgreSQL) ao Power BI Free, utilizando chamadas à API REST do Supabase para carregar dados de forma segura e eficiente.
 A tabela de exemplo utilizada é chamada gastos.
 
+🎥 [Clique para assistir ao vídeo de demonstração](assets/demonstração.mp4)
+
 ---
 
 ## 🚀 Funcionalidades
