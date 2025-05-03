@@ -5,7 +5,7 @@ Este projeto demonstra como integrar uma base de dados Supabase (PostgreSQL) ao 
 A tabela de exemplo utilizada é chamada gastos.
 ---
 
-🎥 [Clique para assistir ao vídeo de demonstração](Demonstracao.gif)
+🎥 ![Vídeo de demonstração](Demonstracao.gif)
 
 ---
 
